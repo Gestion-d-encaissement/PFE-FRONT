@@ -1,0 +1,143 @@
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body"><br>
+        
+        <hr>
+        <div class="mb-3 row">
+          <label class="col-3 col-form-label">Export Table as</label>
+          <div class="col-3">
+            <select class="form-select" [(ngModel)]="downloadAs">
+              <option selected value="png">png</option>
+              <option value="xlsx">xlsx</option>
+              <option value="pdf">pdf</option>
+              <option value="txt">txt</option>
+              <option value="csv">csv</option>
+              <option value="json">json</option>
+              <option value="xml">xml</option>
+            </select>
+          </div>
+          <div class="col-5">
+            <button type="button" class="btn btn-primary" (click)="export()">
+              Downlaod as {{ downloadAs }}
+            </button>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+          <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+            placeholder="&#61442;   Chercher par numero facture">
+        </div>
+        <table id="sampleTable" class="table caption-top">
+          <caption>List des Factures  <p>Le :{{todayNumber | date}}</p></caption>
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Id facture</th>
+              <th scope="col">Numero facture</th>
+              <th scope="col">Montant Facture</th>
+              <th scope="col">Periode</th>
+
+              <th scope="col">Etat facture </th>
+
+
+              <th scope="col">client</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of factures | filter:searchText">
+              <th> {{user.id }}</th>
+              <th> {{user.numfact }}</th>
+              <td>{{user.montantfact }}</td>
+              <td>Du {{user.datedebut }}  Au {{user.datefin }}</td>
+
+              <td>{{user.etat }}</td>
+              <td scope="row">{{user.client?.tel }} </td>
+            </tr>
+            <tr>
+              <th scope="row">Montant Total </th>
+              <td colspan="1" class="table-active"> <b>{{count}}</b></td>
+
+            </tr>
+          </tbody>
+
+
+
+        </table>
+        </div>
+        <div class="modal fade" id="addfacture" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Ajouter Facture</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div [hidden]="!submitted" class="alert alert-success alert-dismissible fade show" role="alert">
+                  <h6>Facture Ajouter Avec succes </h6>
+
+                </div>
+
+                <div class="card-body">
+                  <form (ngSubmit)="onSubmit() ">
+
+                    <div class="form-group">
+                      <label for="contactMethod">Client</label>
+                      <select class="form-control" required [(ngModel)]="fact.client " name="client">
+                        <option *ngFor="let client of clients" [ngValue]="client">{{ client.nom }}</option>
+                      </select>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label for="title">Montant Facture</label>
+                      <input class="form-control" required [(ngModel)]="fact.montantfact" name="montantfact" />
+                    </div>
+                    <div class="form-group">
+                      <label for="title">Date du debut</label>
+                      <input type="date" class="form-control" required [(ngModel)]="fact.datedebut" name="datedebut" />
+                    </div>
+                    <div class="form-group">
+                      <label for="title">Date du fin</label>
+                      <input type="date" class="form-control" required [(ngModel)]="fact.datefin" name="datefin" />
+                    </div>
+
+
+
+
+                    <br />
+                    <button
+                      [disabled]="(  !fact.datefin  ||!fact.datedebut || !fact.montantfact || !fact.client   )"
+                      class="btn btn-success" type="submit">Ajouter</button>
+
+                  </form>
+                </div>
+
+
+              </div>
+              <div class="modal-footer"> <button type="button" class="btn btn-secondary"
+                  data-bs-dismiss="modal">Annuler</button> </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+</section>

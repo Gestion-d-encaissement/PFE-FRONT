@@ -1,0 +1,216 @@
+
+
+<section class="section">
+  <div class="row">
+     <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <br>
+          <div class="card" style="border-top: solid 2px rgb(241, 149, 10) ;border-bottom: solid 2px rgb(241, 149, 10) ;">
+          <div   class="row" >
+            <div class="col-lg-4">
+               <h4 style="margin: 20px;">  Liste-Agence</h4>
+
+            </div>
+            <div class="col-lg-4">
+              <div class="card">
+
+              </div>
+           </div>
+           <div class="col-lg-4">
+            <div class="card">
+            <div class="row">
+              <div class="col-md-2">
+              </div>
+              <div class="col-md-10">
+                <button style="margin-top: 20px;"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addfacture"><i class="bi bi-folder-plus"></i> Nouveau</button>&nbsp;
+
+               </div>
+            </div>
+            </div>
+         </div>
+         </div>
+          </div>
+ <hr>
+ <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+  <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;   Chercher">
+</div>
+<table id="table" class="table caption-top" >
+  <caption>List des Agences</caption>
+  <thead class="table-dark">
+     <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">Code Agence</th>
+        <th class="text-center">Adresse</th>
+        <th class="text-center">Designation</th>
+        <th class="text-center">Action</th>
+
+
+
+
+     </tr>
+  </thead>
+  <tbody>
+
+     <tr *ngFor="let user of agences | filter:searchText">
+        <td style="text-align:center;">
+          {{user.id }}
+        </td>
+        <td style="text-align:center;">
+         {{user.codeAgence}}
+        </td>
+        <td style="text-align:center;">
+         {{user.adresse}}
+         </td>
+         <td style="text-align:center;">
+          {{user.designation}}
+          </td>
+
+
+         <td>
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletemodal" (click)="detail(user)"> <i class="bi bi-trash"></i> </button>&nbsp;
+
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#updatemodal" (click)="edit(user)"> <i class="bi bi-pencil-square"></i> </button>
+         </td>
+
+     </tr>
+
+  </tbody>
+</table>
+          </div>
+       <div class="modal fade" id="deletemodal" tabindex="-1">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <div class="modal-header">
+                 <h5 class="modal-title">Confirme</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+               <div [hidden]="!submitted" class="alert alert-success alert-dismissible fade show" role="alert">
+                 <h6>Agence deleted</h6>
+
+                           </div>
+                              <div *ngIf="!submitted">
+                                vous-etes sur de suprimer l'agence {{useer.adresse }} avec Code Agence: <b>{{useer.codeAgence }}</b> et designation :<b>{{useer.designation }}</b>    <br>
+                                pour confirmer clicker sur ok
+
+                              </div>
+              </div>
+              <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button> <button type="button" class="btn btn-primary" (click) = "deleteagence(useer.id)" >Ok</button></div>
+           </div>
+        </div>
+     </div>
+     <div class="modal fade" id="updatemodal" tabindex="-1">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title">Modifier Utilisateur</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+             <div [hidden]="!submitted2" class="alert alert-success alert-dismissible fade show" role="alert">
+               <h6>Agence Modifer Avec succes </h6>
+
+                         </div>
+
+                         <div class="card-body">
+                          <form (ngSubmit)="updateagence()">
+
+                              <div class="form-group">
+                                  <label> Adresse</label>
+                                  <input type="text" class="form-control" id="firstName" [(ngModel)]="useer.adresse"
+                                      name="adresse">
+                              </div>
+
+                              <div class="form-group">
+                                  <label> Code Agent</label>
+                                  <input type="text" class="form-control" id="lastName" [(ngModel)]="useer.codeAgence"
+                                      name="codeAgence">
+                              </div>
+
+
+                              <br />
+                              <button class="btn btn-success" type="submit">Modifier</button>
+
+                          </form>
+                      </div>
+
+
+            </div>
+            <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>  </div>
+         </div>
+      </div>
+   </div>
+
+       <div class="modal fade" id="addfacture" tabindex="-1">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <div class="modal-header">
+                 <h5 class="modal-title">Ajouter Agence</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+               <div [hidden]="!submitted" class="alert alert-success alert-dismissible fade show" role="alert">
+                 <h6>Ajence Ajouter Avec succes </h6>
+
+                           </div>
+
+                           <div class="card-body">
+                            <form  (ngSubmit)="onSubmit() " >
+
+
+                            <div class="form-group">
+                              <label for="title">Code Agence</label>
+                              <input class="form-control" type="number"
+                              required [(ngModel)]="agen.codeAgence" name="codeAgence"
+                              />
+                            </div>
+
+                            <div class="form-group">
+                              <label for="title">Designation</label>
+                              <input class="form-control"
+                              required [(ngModel)]="agen.designation" name="designation"
+                              />
+                            </div>
+                            <div class="form-group">
+                              <label for="title">Adresse</label>
+                              <input type="text" class="form-control"
+                              required [(ngModel)]="agen.adresse" name="adresse"
+                              />
+                            </div>
+
+
+
+                                <br />
+                                <button [disabled]="(!agen.adresse || !agen.codeAgence ||!agen.designation  )" class="btn btn-success" type="submit">Ajouter</button>
+
+                            </form>
+                        </div>
+
+
+              </div>
+              <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>  </div>
+           </div>
+        </div>
+     </div>
+
+
+
+
+
+
+
+
+
+
+        </div>
+     </div>
+  </div>
+
+
+
+
+
+
+</section>

@@ -1,0 +1,142 @@
+
+
+<section class="section">
+  <div class="row">
+     <div class="col-lg-12">
+        <div class="card">
+                   <div class="card-body">
+                    <div class="card-body">
+                         <div class="modal fade" id="deletemodal" tabindex="-1">
+                         <div class="modal-dialog">
+                            <div class="modal-content">
+                               <div class="modal-header">
+                                  <h5 class="modal-title">Confirme</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                               </div>
+                               <div class="modal-body">
+                                <div [hidden]="!submitted" class="alert alert-success alert-dismissible fade show" role="alert">
+                                  <h1>User deleted</h1>
+
+                                            </div>
+                                {{useer.id }}
+                                 vous-etes sur de suprimer l'utilisateur {{useer.username }} avec nom: <b>{{useer.nom }}</b> , prenom:<b>{{useer.prenom }}</b>  et matricule: <b>{{useer.matricule }}</b> <br>
+                                 pour confirmer clicker sur ok
+
+                               </div>
+                               <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button> <button type="button" class="btn btn-primary" (click) = "deleteuser(useer.id)" >Ok</button></div>
+                            </div>
+                         </div>
+                      </div>
+
+                      <div class="modal fade" id="updatemodal" tabindex="-1">
+                        <div class="modal-dialog">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title">Modifier Utilisateur</h5>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                               <div [hidden]="!submitted2" class="alert alert-success alert-dismissible fade show" role="alert">
+                                 <h6>User Modifer Avec succes </h6>
+
+                                           </div>
+
+                                           <div class="card-body">
+                                            <form (ngSubmit)="updateuser()">
+
+                                                <div class="form-group">
+                                                    <label> Username</label>
+                                                    <input type="text" class="form-control" id="firstName" [(ngModel)]="useer.username"
+                                                        name="username">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label> Nom</label>
+                                                    <input type="text" class="form-control" id="lastName" [(ngModel)]="useer.nom"
+                                                        name="nom">
+                                                </div>
+
+
+                                                <br />
+                                                <button class="btn btn-success" type="submit">Modifier</button>
+
+                                            </form>
+                                        </div>
+
+
+                              </div>
+                              <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>  </div>
+                           </div>
+                        </div>
+                     </div>
+
+                   </div>
+                   <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;   Chercher">
+                  </div>
+            <table id="table" class="table caption-top" >
+              <caption>List des Utilisateurs</caption>
+              <thead class="table-dark">
+                 <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Username</th>
+                    <th class="text-center">Codeagence</th>
+                    <th class="text-center">Agence</th>
+                    <th class="text-center">Matricule</th>
+                    <th class="text-center">Nom</th>
+                    <th class="text-center">Prenom</th>
+                    <th class="text-center">Role</th>
+                    <th class="text-center">Actions</th>
+
+
+                 </tr>
+              </thead>
+              <tbody>
+
+                 <tr *ngFor="let user of datauser | filter:searchText">
+                    <td style="text-align:center;">
+                      {{user.id }}
+                    </td>
+                    <td style="text-align:center;">
+                     {{user.username}}
+                    </td>
+                    <td style="text-align:center;">
+                      {{user.agence?.codeAgence}}
+                     </td>
+                     <td style="text-align:center;">
+                      {{user.agence?.adress}}
+                      </td>
+                      <td style="text-align:center;">
+                        {{user.matricule}}
+                        </td>
+                    <td style="text-align:center;">
+                     {{user.nom}}
+                    </td>
+                    <td style="text-align:center;">
+                     {{user.prenom}}
+                    </td>
+                    <td style="text-align:center;">
+                      {{user.roles[0].name }}
+                     </td>
+
+                     <td>
+                      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletemodal" (click)="detail(user)"> <i class="bi bi-trash"></i> </button>&nbsp;
+
+                      <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#updatemodal" (click)="edit(user)"> <i class="bi bi-pencil-square"></i> </button>
+                     </td>
+
+                 </tr>
+
+              </tbody>
+            </table>
+           </div>
+        </div>
+     </div>
+  </div>
+
+
+
+
+
+</section>

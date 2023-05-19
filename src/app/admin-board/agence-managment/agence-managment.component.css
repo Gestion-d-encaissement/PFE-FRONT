@@ -1,0 +1,16 @@
+.search-hero {
+  max-width: 500px;
+  padding-bottom: 50px;
+  margin:auto;
+}
+#basic-addon1
+{
+  background-color: rgb(10, 114, 146);
+}
+.bi-search{
+  color: white;
+}
+caption{
+  font-weight: bold;
+  color: rgb(10, 114, 146);
+}

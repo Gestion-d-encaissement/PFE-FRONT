@@ -1,0 +1,11 @@
+#bg{
+  background-image: url('../../assets/img/wave.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card{
+  box-shadow: 9px 13px 5px 0px rgba(163,171,207,0.75);
+-webkit-box-shadow: 9px 13px 5px 0px rgba(163,171,207,0.75);
+-moz-box-shadow: 9px 13px 5px 0px rgba(163,171,207,0.75);
+}

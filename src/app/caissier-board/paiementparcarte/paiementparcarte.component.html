@@ -1,0 +1,154 @@
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body"><br>
+        <div class="card" style="border-top: solid 2px rgb(241, 149, 10) ;border-bottom: solid 2px rgb(241, 149, 10) ;">
+          <div class="row">
+            <div class="col-lg-8" id="htmlData"><br>
+
+              <div  >
+                <h3>&nbsp;&nbsp;&nbsp; Paiement par carte</h3><hr>
+               <h4 style="color:rgb(1, 23, 44)">&nbsp;&nbsp;&nbsp;Detaille de Facture</h4>
+               <hr>
+              <th>&nbsp;&nbsp;&nbsp; Numero facture: <b>{{facture.id }}</b></th><br>
+              <td>&nbsp;&nbsp;&nbsp;Montant Facture : <b>{{facture.montantfact }}</b></td><br>
+              <td>&nbsp;&nbsp;&nbsp;Periode : <b>Du {{facture.datedebut }}  Au {{facture.datefin }}</b></td><br>
+              <td>&nbsp;&nbsp;&nbsp;Date Debut : <b>{{facture.datedebut}}</b></td><br>
+              <td>&nbsp;&nbsp;&nbsp;Date Fin : <b>{{facture.datefin}}</b></td><br>
+              <td>&nbsp;&nbsp;&nbsp;Etat facture : <b>{{facture.etat }}</b></td><br>
+              <td scope="row">&nbsp;&nbsp;&nbsp;Numero client : <b>{{facture.client?.tel }}</b> </td>
+
+              </div><br>
+
+
+              <div  >
+                <div id="demo"  *ngFor="let p of paiementParcarte"><hr>
+                  <h4  style="color:rgb(1, 23, 44)">&nbsp;&nbsp;&nbsp;Recu de paiement par carte</h4>
+                  <hr>
+                  <th>&nbsp;&nbsp;&nbsp; ID Paiement: <b>  {{p.id}}</b></th><br>
+                  <td>&nbsp;&nbsp;&nbsp;Date de Paiement : <b> {{p.datepay}}</b></td><br>
+                  <td>&nbsp;&nbsp;&nbsp;Montant payee : <b> {{p.montant}}</b></td><br>
+                  <td>&nbsp;&nbsp;&nbsp;ID Transaction<b> {{p.idtransaction}}</b></td><br>
+                  <td>&nbsp;&nbsp;&nbsp;Numero Carte : <b> {{p.numcarte}}</b></td><br>
+                  <td scope="row">&nbsp;&nbsp;&nbsp;ID Facture : <b> {{p.facture?.id}}</b> </td>
+
+
+                </div>
+                &nbsp;&nbsp;&nbsp;<button  *ngIf="facture.etat=='Soldee'" class="btn btn-info" printSectionId="demo" ngxPrint>Imprimer recu</button>
+
+              </div>
+
+            </div>
+            <div class="col-lg-4">
+              <div class="card">
+                <button *ngIf="facture.etat=='non soldee'" style="margin-top: 20px;" class="btn btn-success"data-bs-toggle="modal"
+                data-bs-target="#addfacture" ><i
+                  class="bi bi-table"></i> Payer</button>
+
+
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card">
+                <div class="row">
+                  <div class="col-md-2">
+                  </div>
+                  <div class="col-md-10">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addfacture" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Paiement Facture par carte</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div [hidden]="!submitted" class="alert alert-success alert-dismissible fade show" role="alert">
+            <h6>Facture Payer Avec succes </h6>
+
+          </div>
+
+          <div class="card-body">
+            <form (ngSubmit)="onSubmit() ">
+              <div class="form-group">
+                <label for="contactMethod">caissier</label>
+                <select class="form-control" required [(ngModel)]="paiement.caissier " name="caissier">
+                  <option   [ngValue]="caissier">{{ caissier.id}}</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="contactMethod">facture</label>
+                <select class="form-control" required [(ngModel)]="paiement.facture " name="facture">
+                  <option   [ngValue]="facture">{{ facture.id }}</option>
+                </select>
+              </div>
+
+
+
+
+              <div class="form-group">
+                <label for="title">Montant Facture : {{facture.montantfact }}</label>
+                <input class="form-control" required [(ngModel)]="paiement.montant" name="montant" />
+              </div>
+              <div class="form-group">
+                <label for="title">datepay</label>
+                <input type="date" class="form-control" required [(ngModel)]="paiement.datepay" name="datepay" />
+              </div>
+              <div class="form-group">
+                <label for="title">idtransaction</label>
+                <input class="form-control" required [(ngModel)]="paiement.idtransaction" name="idtransaction" />
+              </div>
+              <div class="form-group">
+                <label for="title">numcarte </label>
+                <input class="form-control" required [(ngModel)]="paiement.numcarte" name="numcarte" />
+              </div>
+
+
+
+              <br />
+              <button
+                [disabled]="(!paiement.datepay  )"
+                class="btn btn-success" type="submit">Payer</button>
+
+            </form>
+          </div>
+
+
+        </div>
+        <div class="modal-footer"> <button type="button" class="btn btn-secondary"
+            data-bs-dismiss="modal">Annuler</button> </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+</section>

@@ -1,0 +1,240 @@
+<main>
+  <div class="container">
+
+
+
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Utilisateur Caisser Ajouter avec succes
+  </div>
+  <div class="alert alert-success" *ngIf="isSuccessful2">
+    Utilisateur Employer Ajouter avec succes
+</div>
+     <section *ngIf="!isSuccessful" class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+           <div class="row justify-content-center">
+              <div class="col-lg-12 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                 <div class="d-flex justify-content-center py-4">  </div>
+                 <div class="card mb-6">
+
+
+
+
+
+                                   <div class="card-body">
+                                    <div class="form-check form-check-inline">
+                                      <br>
+                                      <input class="form-check-input" (click)="onclick()" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                      <label class="form-check-label" for="inlineRadio2">  {{Caisser?"Utilisateur Caisser":"Utilisateur Employer"}}</label>
+                                    </div>
+
+                                   </div>
+
+
+
+
+
+
+
+
+                    <div class="card-body " *ngIf="Caisser">
+                       <div class="pt-4 pb-2">
+                          <h5 class="card-title text-center pb-0 fs-4">Ajouter un nouvelle Caisser</h5>
+
+                          <p class="text-center small">Enter your   details to create account</p>
+
+                       </div>
+                       <form  *ngIf="!isSuccessful"
+                       name="form"
+                       (ngSubmit)="f.form.valid && onSubmit()"
+                       #f="ngForm"
+                       novalidate class="row g-3 needs-validation" novalidate>
+                       <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                        Signup failed!<br />{{ errorMessage }}
+                      </div>
+
+                          <div class="col-12">
+                             <label for="yourUsername" class="form-label">Username</label>
+                             <div class="input-group has-validation">
+                                 <input type="text" name="username"
+                                 [(ngModel)]="form.username"
+                                 required
+                                 minlength="3"
+                                 maxlength="20"
+                                 #username="ngModel"   class="form-control"   required>
+                                <div class="invalid-feedback" *ngIf="f.submitted && username.invalid">Please choose a username.</div>
+                             </div>
+                          </div>
+                          <div class="col-12">
+                            <label for="yourEmail" class="form-label">Code Agence </label> <input type="number"
+                             name="codeagence"
+                            [(ngModel)]="form.codeagence"
+                            required
+                            codeagence
+                            #codeagence="ngModel"  class="form-control"   required>
+                            <div class="invalid-feedback" *ngIf="codeagence.errors">Please enter a valid code!</div>
+                         </div>
+                         <div class="col-12">
+                          <label for="yourEmail" class="form-label">Nom </label> <input type="text"
+                          name="nom"
+                          [(ngModel)]="form.nom"
+                          required
+                          nom
+                          #nom="ngModel"  class="form-control"   required>
+                          <div class="invalid-feedback" *ngIf="nom.errors">Please enter a valid code!</div>
+                       </div>
+                       <div class="col-12">
+                        <label for="yourEmail" class="form-label">prrenom </label> <input type="text"
+                        name="prenom"
+                        [(ngModel)]="form.prenom"
+                        required
+                        prenom
+                        #prenom="ngModel"  class="form-control"   required>
+                        <div class="invalid-feedback" *ngIf="prenom.errors">Please enter a valid code!</div>
+                     </div>
+                     <div class="col-12">
+                      <label for="yourEmail" class="form-label">matricule </label> <input type="text"
+                      name="matricule"
+                      [(ngModel)]="form.matricule"
+                      required
+                      matricule
+                      #matricule="ngModel"  class="form-control"   required>
+                      <div class="invalid-feedback" *ngIf="matricule.errors">Please enter a valid code!</div>
+                   </div>
+
+                   <div class="form-group">
+                    <label for="contactMethod">Agence</label>
+                    <select class="form-control"
+                    required [(ngModel)]="form.agence " name="agence"
+                       >
+                        <option *ngFor="let agence of agences" [ngValue]="agence">{{ agence.adresse }}</option>
+                    </select>
+                </div>
+
+
+
+
+
+
+                          <div class="col-12">
+                             <label for="yourPassword" class="form-label">Password</label> <input type="password"
+                             name="password"
+                             [(ngModel)]="form.password"
+                             required
+                             minlength="6"
+                             #password="ngModel"class="form-control" id="yourPassword" required>
+                             <div class="invalid-feedback" *ngIf="f.submitted && password.invalid">Please enter your password!</div>
+                          </div>
+
+                          <div class="col-12">
+
+                          </div>
+                          <div class="col-12"> <button class="btn btn-primary w-100" type="submit" [disabled]="(!form.username ||!form.agence || !form.password || !form.matricule || !form.prenom || !form.codeagence || !form.nom  )">Create Account</button></div>
+                          <div class="col-12">
+                           </div>
+                       </form>
+                    </div>
+
+
+
+                    <div class="card-body " *ngIf="Employer">
+                      <div class="pt-4 pb-2">
+                         <h5 class="card-title text-center pb-0 fs-4">Ajouter un nouvelle Employer</h5>
+
+                         <p class="text-center small">Enter your   details to create account</p>
+
+                      </div>
+                      <form  *ngIf="!isSuccessful2"
+                      name="form"
+                      (ngSubmit)="f.form.valid && onSubmit2()"
+                      #f="ngForm"
+                      novalidate class="row g-3 needs-validation" novalidate>
+                      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                       Signup failed!<br />{{ errorMessage }}
+                     </div>
+
+                         <div class="col-12">
+                            <label for="yourUsername" class="form-label">Username</label>
+                            <div class="input-group has-validation">
+                                <input type="text" name="username"
+                                [(ngModel)]="form.username"
+                                required
+                                minlength="3"
+                                maxlength="20"
+                                #username="ngModel"   class="form-control"   required>
+                               <div class="invalid-feedback" *ngIf="f.submitted && username.invalid">Please choose a username.</div>
+                            </div>
+                         </div>
+                         <div class="col-12">
+                           <label for="yourEmail" class="form-label">Code Agence </label> <input type="number"
+                            name="codeagence"
+                           [(ngModel)]="form.codeagence"
+                           required
+                           codeagence
+                           #codeagence="ngModel"  class="form-control"   required>
+                           <div class="invalid-feedback" *ngIf="codeagence.errors">Please enter a valid code!</div>
+                        </div>
+                        <div class="col-12">
+                         <label for="yourEmail" class="form-label">Nom </label> <input type="text"
+                         name="nom"
+                         [(ngModel)]="form.nom"
+                         required
+                         nom
+                         #nom="ngModel"  class="form-control"   required>
+                         <div class="invalid-feedback" *ngIf="nom.errors">Please enter a valid code!</div>
+                      </div>
+                      <div class="col-12">
+                       <label for="yourEmail" class="form-label">prrenom </label> <input type="text"
+                       name="prenom"
+                       [(ngModel)]="form.prenom"
+                       required
+                       prenom
+                       #prenom="ngModel"  class="form-control"   required>
+                       <div class="invalid-feedback" *ngIf="prenom.errors">Please enter a valid code!</div>
+                    </div>
+                    <div class="col-12">
+                     <label for="yourEmail" class="form-label">matricule </label> <input type="text"
+                     name="matricule"
+                     [(ngModel)]="form.matricule"
+                     required
+                     matricule
+                     #matricule="ngModel"  class="form-control"   required>
+                     <div class="invalid-feedback" *ngIf="matricule.errors">Please enter a valid code!</div>
+                  </div>
+
+
+                <div class="form-group">
+                  <label for="contactMethod">Agence</label>
+                  <select class="form-control"
+                  required [(ngModel)]="form.agence " name="agence"
+                     >
+                      <option *ngFor="let agence of agences" [ngValue]="agence">{{ agence.adresse }}</option>
+                  </select>
+
+              </div>
+
+                         <div class="col-12">
+                            <label for="validationPassword" class="form-label">Password</label> <input type="password"
+                            name="password"
+                            [(ngModel)]="form.password"
+                            required
+                            minlength="6"
+                            #password="ngModel"class="form-control" id="yourPassword" required>
+                            <div class="invalid-feedback">
+                              Please choose a username.
+                            </div>                         </div>
+
+                         <div class="col-12">
+
+                         </div>
+                         <div class="col-12"> <button [disabled]="(!form.username ||!form.agence || !form.password || !form.matricule || !form.prenom || !form.codeagence || !form.nom  )" class="btn btn-primary w-100" type="submit">Create Account</button></div>
+                         <div class="col-12">
+                          </div>
+                      </form>
+                   </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </section>
+  </div>
+</main>

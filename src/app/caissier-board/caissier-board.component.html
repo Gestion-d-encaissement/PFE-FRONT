@@ -1,0 +1,76 @@
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <div class="d-flex align-items-center justify-content-between"> <a routerLink="/dashboard"
+        class="logo d-flex align-items-center"> <img src="assets/img/logo.png" alt=""> <span
+           class="d-none d-lg-block">Espace Caissier</span> </a> <i (click)="sidebarToggle()"
+        class="bi bi-list toggle-sidebar-btn"></i></div>
+  <div class="search-bar">
+     
+  </div>
+  <nav class="header-nav ms-auto">
+     <ul class="d-flex align-items-center">
+
+        <li class="nav-item dropdown pe-3">
+           <a *ngIf="isLoggedIn" class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown"> <img
+                 src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> <span
+                 class="d-none d-md-block dropdown-toggle ps-2">{{ username }}</span> </a>
+           <ul *ngIf="isLoggedIn" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+              <li class="dropdown-header">
+                 <h6>{{ username }}</h6>
+                 <span>{{ roles }}</span>
+              </li>
+              <li>
+                 <hr class="dropdown-divider">
+              </li>
+              <li> <a class="dropdown-item d-flex align-items-center" routerLink="/user-profile"> <i
+                       class="bi bi-person"></i> <span>My Profile</span> </a></li>
+              <li>
+                 <hr class="dropdown-divider">
+              </li>
+              <li> <a class="dropdown-item d-flex align-items-center" routerLink="/user-profile"> <i
+                       class="bi bi-gear"></i> <span>Account Settings</span> </a></li>
+              <li>
+                 <hr class="dropdown-divider">
+              </li>
+              <li> <button class="dropdown-item d-flex align-items-center"  (click)="lougout()"> <i
+                       class="bi bi-box-arrow-right"></i> <span>Sign Out</span> </button></li>
+           </ul>
+        </li>
+     </ul>
+  </nav>
+</header>
+
+
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+     <li class="nav-item"> <a class="nav-link " routerLink="listfact"> <i class="bi bi-grid"></i>
+           <span>Dashboard</span> </a></li>
+     <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#"> <i
+              class="bi bi-menu-button-wide"></i><span>Paiements</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+           <li> <a routerLink="paycarte"> <i class="bi bi-circle"></i><span>Paiements par carte</span> </a></li>
+        </ul>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+         <li> <a routerLink="paychq"> <i class="bi bi-circle"></i><span>Paiements par chéque</span> </a></li>
+      </ul>
+      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li> <a routerLink="payesp"> <i class="bi bi-circle"></i><span>Paiements par espéce</span> </a></li>
+     </ul>
+     </li>
+
+
+  </ul>
+</aside>
+
+
+<main id="main" class="main">
+  <div class="pagetitle">
+
+
+  </div>
+  <section class="section dashboard">
+    <router-outlet></router-outlet>
+
+  </section>
+</main>
